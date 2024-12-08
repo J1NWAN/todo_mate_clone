@@ -1,16 +1,24 @@
-# scribble_todo
+# 긁적글적 Todo
 
-A new Flutter project.
+## 프로젝트 소개
 
-## Getting Started
+- 긁적글적 Todo는 간단한 일정 관리 앱입니다.
+- todo mate 앱을 참고하여 만들었습니다.
 
-This project is a starting point for a Flutter application.
+## 화면 구조
 
-A few resources to get you started if this is your first Flutter project:
+화면은 크게 피드, 둘러보기, 알림, My 화면으로 구성되어 있습니다.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 피드 : 일정 관리 화면
+- 둘러보기 : 사용자 검색 및 다른 사용자 피드 둘러보기
+- 알림 : 알림 화면
+- My : 내정보 화면
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 피드 화면 (2024-12-08)
+
+- 피드 화면은 크게 헤더, 캘린더, 피드 리스트로 구성되어 있습니다.
+- 헤더는 현재 날짜와 캘린더 버튼, 피드 작성 버튼으로 구성되어 있습니다.
+- 캘린더는 월별 캘린더로 구성되어 있습니다.
+- 피드 리스트는 오늘 할 일을 체크하고 완료 여부를 표시하는 피드 리스트로 구성되어 있습니다.
+
+## 둘러보기 화면 (작업중)
