@@ -38,6 +38,9 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.black,
           elevation: 0,
         ),
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: CommonColors.blueColor,
+        ),
       ),
       home: Scaffold(
         body: screens[currentIndex],
