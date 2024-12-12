@@ -14,6 +14,35 @@ class DiaryScreen extends StatefulWidget {
 
 class _DiaryScreenState extends State<DiaryScreen> {
   String selectedValue = '나만보기';
+  String selectedEmoji = '';
+  List<String> emojiList = [
+    '😀',
+    '😃',
+    '😄',
+    '😁',
+    '😆',
+    '😅',
+    '😂',
+    '🤣',
+    '😊',
+    '😇',
+    '🙂',
+    '🙃',
+    '😉',
+    '😌',
+    '😍',
+    '😘',
+    '😗',
+    '😙',
+    '😚',
+    '😋',
+    '😌',
+    '😍',
+    '😘',
+    '😗',
+    '😙',
+    '😚'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +69,68 @@ class _DiaryScreenState extends State<DiaryScreen> {
             Align(
               alignment: Alignment.center,
               child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  CupertinoIcons.smiley,
-                  size: 50,
-                  color: Color.fromRGBO(140, 140, 200, 1.0),
-                ),
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return StatefulBuilder(builder: (context, setModalState) {
+                        return Container(
+                          height: 330,
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  '이모지',
+                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              // 이모지 그리드 레이아웃
+                              SizedBox(
+                                height: 250,
+                                width: double.infinity,
+                                child: GridView.builder(
+                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 6,
+                                    mainAxisSpacing: 10,
+                                    crossAxisSpacing: 10,
+                                  ),
+                                  itemCount: emojiList.length,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        // 이모지 선택 로직
+                                        setState(() {
+                                          selectedEmoji = emojiList[index];
+                                        });
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        emojiList[index],
+                                        style: const TextStyle(fontSize: 30),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      });
+                    },
+                  );
+                },
+                icon: selectedEmoji.isNotEmpty
+                    ? Text(selectedEmoji, style: const TextStyle(fontSize: 35))
+                    : const Icon(
+                        CupertinoIcons.smiley,
+                        size: 50,
+                        color: Color.fromRGBO(140, 140, 200, 1.0),
+                      ),
               ),
             ),
             const SizedBox(height: 20),
