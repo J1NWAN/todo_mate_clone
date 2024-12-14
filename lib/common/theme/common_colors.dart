@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class CommonColors {
@@ -12,4 +14,18 @@ class CommonColors {
   static Color yellowColor = Colors.yellow.shade400;
 
   static Color redColor = Colors.red.shade400;
+
+  static Color randomColor() {
+    final random = Random();
+    final randomNumber = random.nextInt(5);
+
+    List<Color> colors = [
+      Colors.red[300]!,
+      Colors.green[300]!,
+      Colors.blue[300]!,
+      Colors.yellow[300]!,
+      Colors.purple[300]!,
+    ];
+    return colors[randomNumber];
+  }
 }
