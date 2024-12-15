@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scribble_todo/common/theme/common_colors.dart';
+import 'package:scribble_todo/feed/screen/category_screen.dart';
 
 class TodoWidget extends StatefulWidget {
   final String division;
@@ -14,11 +15,6 @@ class _TodoWidgetState extends State<TodoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    List<Color> categoryColorList = [
-      const Color.fromRGBO(229, 115, 115, 1),
-      const Color.fromRGBO(129, 199, 132, 1),
-      const Color.fromRGBO(100, 181, 246, 1)
-    ];
     List<String> categoryNameList = ['카테고리 1', '카테고리 2', '카테고리 3'];
 
     return Align(
@@ -32,7 +28,7 @@ class _TodoWidgetState extends State<TodoWidget> {
             3,
             (index) => TodoItemWidget(
               categoryName: categoryNameList[index],
-              categoryColor: categoryColorList[index],
+              categoryColor: CommonColors.categoryColorList[index],
               isTextFieldVisible: _openTextFieldIndex == index,
               onToggleTextField: () {
                 setState(() {
@@ -80,41 +76,46 @@ class TodoItemWidget extends StatelessWidget {
               color: CommonColors.primaryColor,
               borderRadius: BorderRadius.circular(30),
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.lock,
-                    size: 18,
-                    color: CommonColors.secondaryColor2,
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      categoryName,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: categoryColor),
+            child: GestureDetector(
+              onLongPress: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const CategoryScreen()));
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.lock,
+                      size: 18,
+                      color: CommonColors.secondaryColor2,
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  GestureDetector(
-                    onTap: onToggleTextField,
-                    child: Container(
-                      width: 20,
-                      height: 20,
-                      decoration: BoxDecoration(
-                        color: CommonColors.secondaryColor,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: const Icon(
-                        Icons.add,
-                        size: 16,
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        categoryName,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: categoryColor),
                       ),
                     ),
-                  )
-                ],
+                    const SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: onToggleTextField,
+                      child: Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                          color: CommonColors.secondaryColor,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: const Icon(
+                          Icons.add,
+                          size: 16,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

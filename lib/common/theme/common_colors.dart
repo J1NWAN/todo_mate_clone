@@ -15,6 +15,12 @@ class CommonColors {
 
   static Color redColor = Colors.red.shade400;
 
+  static List<Color> categoryColorList = [
+    const Color.fromRGBO(229, 115, 115, 1),
+    const Color.fromRGBO(129, 199, 132, 1),
+    const Color.fromRGBO(100, 181, 246, 1)
+  ];
+
   static Color randomColor() {
     final random = Random();
     final randomNumber = random.nextInt(5);
