@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:scribble_todo/common/data/common_data.dart';
 import 'package:scribble_todo/common/theme/common_colors.dart';
 import 'package:scribble_todo/common/widget/setting_modal_widget.dart';
+import 'package:scribble_todo/feed/widget/color_modal_widget.dart';
 
 class CategoryDetailScreen extends StatefulWidget {
   final String categoryName;
   final Color categoryColor;
+
   const CategoryDetailScreen({super.key, required this.categoryName, required this.categoryColor});
 
   @override
@@ -13,7 +16,15 @@ class CategoryDetailScreen extends StatefulWidget {
 }
 
 class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
+  int selectedSettingIndex = 0;
   String selectedSettingValue = '나만보기';
+  late Color selectedColor;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedColor = widget.categoryColor;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +79,12 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                     context: context,
                     builder: (context) {
                       return StatefulBuilder(
-                        builder: (context, setModalState) {
+                        builder: (context, selectModalValue) {
                           return SettingModalWidget(
                             selectedValue: selectedSettingValue,
-                            setModalState: (value) {
+                            selectModalValue: (index, value) {
                               setState(() {
+                                selectedSettingIndex = index;
                                 selectedSettingValue = value;
                               });
                             },
@@ -83,11 +95,11 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                   );
                 },
                 child: SizedBox(
-                  width: 100,
+                  width: 120,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Icon(Icons.lock, size: 18, color: CommonColors.secondaryColor),
+                      Icon(CommonData.privacySettingIconList[selectedSettingIndex], size: 18, color: CommonColors.secondaryColor),
                       const SizedBox(width: 5),
                       Text(selectedSettingValue, style: const TextStyle(color: Colors.white, fontSize: 13)),
                       Icon(Icons.arrow_drop_down, size: 16, color: CommonColors.secondaryColor),
@@ -108,7 +120,23 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
               title: const Text('색상', style: TextStyle(color: Colors.white, fontSize: 13)),
               trailing: GestureDetector(
                 onTap: () {
-                  print('');
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return StatefulBuilder(
+                        builder: (context, selectModalValue) {
+                          return ColorModalWidget(
+                            parameterColor: selectedColor,
+                            selectColor: (color) {
+                              setState(() {
+                                selectedColor = color;
+                              });
+                            },
+                          );
+                        },
+                      );
+                    },
+                  );
                 },
                 child: SizedBox(
                   width: 100,
@@ -119,7 +147,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                         margin: const EdgeInsets.only(right: 8),
                         width: 20,
                         height: 20,
-                        decoration: BoxDecoration(color: widget.categoryColor, borderRadius: BorderRadius.circular(10)),
+                        decoration: BoxDecoration(color: selectedColor, borderRadius: BorderRadius.circular(10)),
                       ),
                       Icon(Icons.arrow_drop_down, size: 16, color: CommonColors.secondaryColor),
                     ],
