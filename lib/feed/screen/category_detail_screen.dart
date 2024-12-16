@@ -4,6 +4,7 @@ import 'package:scribble_todo/common/data/common_data.dart';
 import 'package:scribble_todo/common/theme/common_colors.dart';
 import 'package:scribble_todo/common/widget/setting_modal_widget.dart';
 import 'package:scribble_todo/feed/widget/color_modal_widget.dart';
+import 'package:scribble_todo/feed/widget/exit_modal_widget.dart';
 
 class CategoryDetailScreen extends StatefulWidget {
   final String categoryName;
@@ -166,13 +167,23 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
               children: [
                 Flexible(
                   flex: 1,
-                  child: Container(
-                    height: 35,
-                    decoration: BoxDecoration(color: CommonColors.primaryColor, borderRadius: BorderRadius.circular(5)),
-                    child: const Center(
-                      child: Text(
-                        '종료하기',
-                        style: TextStyle(color: Colors.white, fontSize: 13),
+                  child: GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return const ExitModalWidget();
+                        },
+                      );
+                    },
+                    child: Container(
+                      height: 35,
+                      decoration: BoxDecoration(color: CommonColors.primaryColor, borderRadius: BorderRadius.circular(5)),
+                      child: const Center(
+                        child: Text(
+                          '종료하기',
+                          style: TextStyle(color: Colors.white, fontSize: 13),
+                        ),
                       ),
                     ),
                   ),
