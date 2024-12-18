@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scribble_todo/common/theme/common_colors.dart';
+import 'package:scribble_todo/common/widget/dialog_widget.dart';
 
 class SearchBarWidget extends StatelessWidget {
   const SearchBarWidget({super.key});
@@ -32,7 +33,16 @@ class SearchBarWidget extends StatelessWidget {
             filled: true,
             fillColor: CommonColors.primaryColor,
             suffixIcon: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const DialogWidget(
+                    title: '둘러보기 검색',
+                    content: '이메일, ID 또는 키워드로 계정을 검색하실 수 있스빈다. 나의 할 일은 My탭의 나의 기록에서 이용하실 수 있습니다.',
+                    buttonName1: '확인',
+                  ),
+                );
+              },
               icon: const Icon(CupertinoIcons.exclamationmark_circle_fill, size: 20),
             ),
           ),
