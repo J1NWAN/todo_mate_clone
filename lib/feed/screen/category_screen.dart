@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scribble_todo/common/theme/common_colors.dart';
+import 'package:scribble_todo/feed/screen/category_create_screen.dart';
 import 'package:scribble_todo/feed/screen/category_detail_screen.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -20,7 +21,7 @@ class CategoryScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CategoryCreateScreen()));
             },
             icon: const Icon(Icons.add),
           ),

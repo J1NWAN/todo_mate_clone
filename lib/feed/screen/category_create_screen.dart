@@ -1,32 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scribble_todo/common/data/common_data.dart';
 import 'package:scribble_todo/common/theme/common_colors.dart';
-import 'package:scribble_todo/common/widget/dialog_widget.dart';
 import 'package:scribble_todo/common/widget/setting_modal_widget.dart';
 import 'package:scribble_todo/feed/widget/color_modal_widget.dart';
-import 'package:scribble_todo/feed/widget/exit_modal_widget.dart';
 
-class CategoryDetailScreen extends StatefulWidget {
-  final String categoryName;
-  final Color categoryColor;
-
-  const CategoryDetailScreen({super.key, required this.categoryName, required this.categoryColor});
+class CategoryCreateScreen extends StatefulWidget {
+  const CategoryCreateScreen({super.key});
 
   @override
-  State<CategoryDetailScreen> createState() => _CategoryDetailScreenState();
+  State<CategoryCreateScreen> createState() => _CategoryCreateScreenState();
 }
 
-class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
+class _CategoryCreateScreenState extends State<CategoryCreateScreen> {
   int selectedSettingIndex = 0;
   String selectedSettingValue = '나만보기';
-  late Color selectedColor;
-
-  @override
-  void initState() {
-    super.initState();
-    selectedColor = widget.categoryColor;
-  }
+  Color selectedColor = CommonColors.categoryColorList[0];
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +27,13 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
           },
           icon: const Icon(Icons.arrow_back_ios, size: 20),
         ),
-        title: const Text('카테고리', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        title: const Text('카테고리 등록', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text('확인', style: TextStyle(color: Colors.white)),
+            child: const Text('완료', style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -55,16 +43,15 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: TextField(
               autofocus: true,
-              controller: TextEditingController(text: widget.categoryName),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
                 filled: true,
                 fillColor: Colors.black,
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: widget.categoryColor),
+                  borderSide: BorderSide(color: selectedColor),
                 ),
               ),
-              style: TextStyle(color: widget.categoryColor, fontSize: 14),
+              style: TextStyle(color: selectedColor, fontSize: 14),
               onSubmitted: (value) {
                 print('');
               },
@@ -156,64 +143,6 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
                   ),
                 ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Divider(color: CommonColors.primaryColor),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            child: Row(
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          return const ExitModalWidget();
-                        },
-                      );
-                    },
-                    child: Container(
-                      height: 35,
-                      decoration: BoxDecoration(color: CommonColors.primaryColor, borderRadius: BorderRadius.circular(5)),
-                      child: const Center(
-                        child: Text(
-                          '종료하기',
-                          style: TextStyle(color: Colors.white, fontSize: 13),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Flexible(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return const DialogWidget(content: '카테고리를 삭제하시겠습니까?', buttonName1: '취소', buttonName2: '삭제');
-                        },
-                      );
-                    },
-                    child: Container(
-                      height: 35,
-                      decoration: BoxDecoration(color: CommonColors.primaryColor, borderRadius: BorderRadius.circular(5)),
-                      child: const Center(
-                        child: Text(
-                          '삭제',
-                          style: TextStyle(color: Colors.red, fontSize: 13),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
             ),
           ),
         ],

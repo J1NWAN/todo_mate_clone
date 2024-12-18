@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scribble_todo/common/theme/common_colors.dart';
+import 'package:scribble_todo/common/widget/dialog_widget.dart';
 
 class ExitModalWidget extends StatefulWidget {
   const ExitModalWidget({super.key});
@@ -46,9 +47,11 @@ class _ExitModalWidgetState extends State<ExitModalWidget> {
                   onPressed: () {
                     showDialog(
                       context: context,
-                      builder: (context) => showExitDialog(),
+                      builder: (context) {
+                        return const DialogWidget(
+                            content: '카테고리를 종료하시겠습니까?\n기존의 할 일 목록은 유지되지만 새로운 입력은 제한됩니다.', buttonName1: '취소', buttonName2: '종료');
+                      },
                     );
-                    //Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: CommonColors.secondaryColor2,
@@ -87,46 +90,6 @@ class _ExitModalWidgetState extends State<ExitModalWidget> {
           ),
         ),
         const Divider(height: 0),
-      ],
-    );
-  }
-
-  Widget showExitDialog() {
-    return AlertDialog(
-      backgroundColor: CommonColors.primaryColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      content: const Text('카테고리를 종료하시겠습니까?\n기존의 할 일 목록은 유지되지만 새로운 입력은 제한됩니다.', style: TextStyle(fontSize: 11), textAlign: TextAlign.center),
-      actions: [
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            fixedSize: const Size(125, 0),
-            backgroundColor: CommonColors.secondaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          child: const Text(
-            '취소',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            fixedSize: const Size(125, 0),
-            backgroundColor: CommonColors.secondaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          child: const Text(
-            '종료',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
       ],
     );
   }
