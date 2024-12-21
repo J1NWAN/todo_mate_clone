@@ -6,8 +6,9 @@ import 'package:scribble_todo/feed/screen/diary_screen.dart';
 class ProfileWidget extends StatelessWidget {
   final String userName;
   final String division;
+  final String? secondText;
 
-  const ProfileWidget({super.key, required this.userName, required this.division});
+  const ProfileWidget({super.key, required this.userName, required this.division, this.secondText});
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +28,33 @@ class ProfileWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50),
                 ),
               ),
-              Text(
-                userName,
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-              )
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    userName,
+                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                  if (secondText != null)
+                    Text(
+                      secondText!,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: CommonColors.secondaryColor2,
+                      ),
+                    ),
+                  if (division == 'my')
+                    const Row(
+                      children: [
+                        Text('팔로잉 ', style: TextStyle(fontSize: 12)),
+                        Text('0', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                        SizedBox(width: 10),
+                        Text('팔로워 ', style: TextStyle(fontSize: 12)),
+                        Text('0', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                      ],
+                    )
+                ],
+              ),
             ],
           ),
           if (division == 'me')

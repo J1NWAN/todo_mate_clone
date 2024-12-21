@@ -47,7 +47,7 @@ class FeedScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ProfileWidget(userName: 'me', division: 'me'),
+                  ProfileWidget(userName: 'me', division: 'me', secondText: null),
                   CalendarWidget(),
                   TodoWidget(division: 'me'),
                 ],
