@@ -4,6 +4,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:scribble_todo/common/theme/common_colors.dart';
 import 'package:scribble_todo/feed/screen/feed_screen.dart';
 import 'package:scribble_todo/look/screen/look_screen.dart';
+import 'package:scribble_todo/my/screen/my_screen.dart';
 import 'package:scribble_todo/notification/screen/notification_screen.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class _MyAppState extends State<MyApp> {
     const FeedScreen(),
     const LookScreen(),
     const NotificationScreen(),
+    const MyScreen(),
     // const MyScreen(),
   ];
   @override
