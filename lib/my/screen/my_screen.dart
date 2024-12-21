@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:scribble_todo/common/theme/common_colors.dart';
 import 'package:scribble_todo/common/widget/profile_widget.dart';
+import 'package:scribble_todo/my/screen/setting_screen.dart';
 import 'package:scribble_todo/my/service/my_service.dart';
 
 class MyScreen extends StatelessWidget {
@@ -13,7 +14,9 @@ class MyScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingScreen()));
+            },
             icon: const Icon(Icons.settings),
           ),
         ],
